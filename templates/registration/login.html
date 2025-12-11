@@ -1,0 +1,70 @@
+{% extends "layouts/base_auth.html" %}
+{% load static %}
+{% block title %}Iniciar sesión — SIGA{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-4">
+  <img src="{% static 'img/siga_logo.png' %}" 
+       alt="SIGA — Gestión Académica"
+       style="width: 110px; border-radius: 12px;">
+  <h1 class="h4 mt-3 mb-0">Sistema de Gestión Académica</h1>
+  <p class="text-muted small mb-0">Módulo de asistencias</p>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4">
+
+    <h2 class="h5 text-center mb-4">Iniciar sesión</h2>
+
+    <!-- CONTENEDOR CENTRADO -->
+    <div class="text-center">
+
+      <form method="post" action="{% url 'login' %}" style="max-width: 300px; margin: auto;">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <!-- Usuario -->
+        <div class="mb-3">
+          <label class="form-label w-100 text-center">Usuario</label>
+          <div class="input-group justify-content-center">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            {{ form.username }}
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="mb-3">
+          <label class="form-label w-100 text-center">Contraseña</label>
+          <div class="input-group justify-content-center">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            {{ form.password }}
+          </div>
+        </div>
+
+        <!-- Recordarme -->
+        <div class="form-check mb-3 text-center">
+          <input class="form-check-input" type="checkbox" name="remember_me" id="id_remember_me">
+          <label class="form-check-label" for="id_remember_me">
+            Recordarme en este dispositivo
+          </label>
+        </div>
+
+        <button class="btn btn-primary w-100">
+          <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+        </button>
+
+        <div class="text-center mt-3">
+          <a href="{% url 'asistencias:password_reset' %}">¿Olvidaste tu contraseña?</a>
+        </div>
+
+      </form>
+
+    </div>
+    <!-- FIN CONTENEDOR CENTRADO -->
+
+  </div>
+</div>
+
+{% endblock %}
