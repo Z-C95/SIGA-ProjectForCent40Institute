@@ -54,27 +54,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'asistencia.wsgi.application'
 
-# ===== Base de datos (SQLite por defecto, MySQL opcional vía .env) =====
-DB_ENGINE = env("DB_ENGINE", default="sqlite").lower()
-if DB_ENGINE == "mysql":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST', default='127.0.0.1'),
-            'PORT': env('DB_PORT', default='3306'),
-            'OPTIONS': {'charset': 'utf8mb4'},
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': '/tmp/db.sqlite3', # ← CAMBIADA ESTA LÍNEA
-        }
-    }
+# ===== Base de datos =====
+import dj_database_url
+
+# Si hay DATABASE_URL (Vercel/producción), úsala; si no, SQLite local
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME':'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

@@ -12,3 +12,6 @@ tzdata==2025.2
 
 whitenoise
 python-decouple
+
+psycopg2-binary
+dj-database-url
