@@ -1,32 +1,70 @@
-# SIGA — Sistema Integral de Gestión de Asistencias
-Proyecto Final — Instituto de Formación Profesional CENT40  
-Tecnicatura en Análisis y Desarrollo de Sistemas Informáticos  
-Año: 2024/2025
+# SIGA - Sistema Integral de Gestión Académica
 
----
+Sistema web desarrollado con Django 5 para la gestión de asistencias académicas del Instituto CENT N°40.
 
-## 1. Introducción
+[![Deploy con Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://siga-project-for-cent40-institute.vercel.app)
+[![Django](https://img.shields.io/badge/Django-5.2-green?style=for-the-badge&logo=django)](https://www.djangoproject.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue?style=for-the-badge&logo=postgresql)](https://neon.tech)
 
-El Sistema Integral de Gestión de Asistencias (SIGA) es una aplicación web desarrollada con Django 5 cuyo objetivo es brindar una solución eficiente, segura y escalable para la administración académica de asistencias en instituciones educativas.
+## 🚀 Demo en Vivo
 
-El sistema permite gestionar usuarios, docentes, alumnos, materias, cursadas, registros de asistencia, justificativos y reportes estadísticos. Está diseñado bajo criterios de modularidad, mantenibilidad y alineado a buenas prácticas de desarrollo.
+**[Ver proyecto deployado](https://siga-project-for-cent40-institute.vercel.app)**
 
----
+## 📋 Características
 
-## 2. Objetivos del Sistema
+- ✅ Gestión de usuarios (docentes, alumnos)
+- ✅ Control de asistencias
+- ✅ Reportes estadísticos
+- ✅ Sistema de autenticación
+- ✅ Panel administrativo de Django
 
-- Gestionar
+## 🛠️ Tecnologías Utilizadas
 
+- **Backend:** Django 5.2
+- **Base de datos:** PostgreSQL (Neon.tech)
+- **Deploy:** Vercel
+- **Almacenamiento estático:** WhiteNoise
+- **Frontend:** HTML, CSS, JavaScript
 
-
-
-
-# SIGA  — Django 5
-
-## Setup rápido (SQLite demo)
+## 📦 Instalación Local
 ```bash
+# Clonar el repositorio
+git clone https://github.com/Z-C95/SIGA-ProjectForCent40Institute.git
+cd SIGA-ProjectForCent40Institute
+
+# Instalar dependencias
 pip install -r requirements.txt
+
+# Ejecutar migraciones
 python manage.py migrate
-python manage.py createsuperuser  
+
+# Crear superusuario
+python manage.py createsuperuser
+
+# Ejecutar servidor
 python manage.py runserver
 ```
+
+## 🌐 Deploy en Vercel
+
+Este proyecto está configurado para deployarse automáticamente en Vercel:
+
+1. Fork del repositorio
+2. Importar en Vercel
+3. Configurar variables de entorno:
+   - `SECRET_KEY`
+   - `DATABASE_URL`
+   - `DEBUG=False`
+4. Deploy automático
+
+## 👥 Equipo de Desarrollo
+
+Proyecto desarrollado por estudiantes avanzados de Análisis y Desarrollo de Sistemas Informáticos:
+- Luis
+- Érica
+- Lautaro
+- [Tu nombre]
+
+## 📄 Licencia
+
+Instituto CENT N°40 - Campus Virtual Río Negro
