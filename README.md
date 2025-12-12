@@ -63,7 +63,7 @@ Proyecto desarrollado por estudiantes avanzados de Análisis y Desarrollo de Sis
 - Luis
 - Érica
 - Lautaro
-- [Tu nombre]
+- [Leandro.aka.ZC-95]
 
 ## 📄 Licencia
 
