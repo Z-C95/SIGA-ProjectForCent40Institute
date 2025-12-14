@@ -699,13 +699,30 @@ body.dark-mode .sidebar::-webkit-scrollbar-thumb:hover {
   }
 }
 
-@media (max-width: 767.98px) {
-  .wrapper {
-    padding-top: 56px; /* Solo la altura del navbar */
+/* ================================
+   FIX NAVBAR MÓVIL - COMPACTO
+   ================================ */
+
+@media (max-width: 991.98px) {
+  /* Navbar en una sola fila */
+  .navbar {
+    padding: 0.5rem 1rem;
   }
   
-  .main-content,
-  .main-content-full {
-    padding-top: 0.5rem;
+  /* El contenido colapsado debe ser un menú desplegable, no parte del navbar */
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1a1a2e;
+    border-radius: 0 0 8px 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  /* Que no empuje el contenido cuando está cerrado */
+  .navbar-collapse:not(.show) {
+    display: none;
   }
 }
