@@ -22,7 +22,7 @@
 <body class="{% if request.COOKIES.dark_mode == 'true' %}dark-mode{% endif %}">
 
   <!-- NAVBAR SUPERIOR CON MENÚ HAMBURGUESA -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
 
       <!-- LOGO SIGA -->
@@ -85,157 +85,166 @@
     </div>
   </nav>
 
-  <div class="container-fluid">
-    <div class="row">
+  <!-- WRAPPER PRINCIPAL - Compensa el navbar fixed -->
+  <div class="wrapper">
+    
+    {% if request.user.is_authenticated %}
+      
+      <!-- ============================================
+           LAYOUT CON SIDEBAR (USUARIO AUTENTICADO)
+           ============================================ -->
+      
+      <!-- SIDEBAR - Offcanvas en móvil, visible en desktop -->
+      <aside class="sidebar" id="sidebarMenu">
+        
+        <!-- Header del sidebar con botón cerrar (solo móvil) -->
+        <div class="sidebar-header d-flex d-md-none justify-content-between align-items-center p-3 border-bottom">
+          <span class="fw-bold"><i class="fas fa-bars"></i> Menú</span>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
 
-      {% if request.user.is_authenticated %}
-        <!-- SIDEBAR IZQUIERDO CON BOTÓN COLAPSABLE EN MÓVIL -->
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar" id="sidebarMenu">
-          
-          <!-- Botón para mostrar/ocultar menú en móvil -->
-          <div class="d-md-none p-3 border-bottom">
-            <button class="btn btn-sm btn-outline-dark w-100" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#sidebarMenuContent" 
-                    aria-expanded="false">
-              <i class="fas fa-bars"></i> Menú
-            </button>
-          </div>
+        <!-- Contenido del sidebar -->
+        <div class="sidebar-content">
+          <ul class="nav flex-column">
 
-          <!-- Contenido del sidebar (colapsable en móvil) -->
-          <div class="collapse d-md-block" id="sidebarMenuContent">
-            <div class="position-sticky pt-3 sidebar-sticky">
+            <!-- Siempre disponible -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'asistencias:home' %}">
+                <i class="fas fa-home"></i> Inicio
+              </a>
+            </li>
 
-              <ul class="nav flex-column mb-3">
+            {% if request.user.is_staff or request.user.rol == "ADMIN" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:admin_dashboard' %}">
+                  <i class="fas fa-tachometer-alt"></i> Dashboard Admin
+                </a>
+              </li>
 
-                <!-- Siempre disponible -->
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'asistencias:home' %}">
-                    <i class="fas fa-home"></i> Inicio
-                  </a>
-                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:usuarios_lista' %}">
+                  <i class="fas fa-users"></i> Usuarios
+                </a>
+              </li>
 
-                {% if request.user.is_staff or request.user.rol == "ADMIN" %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:admin_dashboard' %}">
-                      <i class="fas fa-tachometer-alt"></i> Dashboard Admin
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:carreras_lista' %}">
+                  <i class="fas fa-book-open"></i> Carreras
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:usuarios_lista' %}">
-                      <i class="fas fa-users"></i> Usuarios
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:materias_lista' %}">
+                  <i class="fas fa-books"></i> Materias
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:carreras_lista' %}">
-                      <i class="fas fa-book-open"></i> Carreras
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:admin_cursadas' %}">
+                  <i class="fas fa-chalkboard-teacher"></i> Cursadas
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:materias_lista' %}">
-                      <i class="fas fa-books"></i> Materias
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:lista_justificativos' %}">
+                  <i class="fas fa-file-medical"></i> Justificativos
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:admin_cursadas' %}">
-                      <i class="fas fa-chalkboard-teacher"></i> Cursadas
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:reportes_curso' %}">
+                  <i class="fas fa-chart-bar"></i> Reportes
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:lista_justificativos' %}">
-                      <i class="fas fa-file-medical"></i> Justificativos
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:admin_metricas' %}">
+                  <i class="fas fa-chart-line"></i> Métricas Admin
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:reportes_curso' %}">
-                      <i class="fas fa-chart-bar"></i> Reportes
-                    </a>
-                  </li>
+            {% elif request.user.rol == "DOCENTE" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:docente_dashboard' %}">
+                  <i class="fas fa-chalkboard"></i> Panel docente
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:admin_metricas' %}">
-                      <i class="fas fa-chart-line"></i> Métricas Admin
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:cursos_docente' %}">
+                  <i class="fas fa-book"></i> Mis cursos
+                </a>
+              </li>
 
-                {% elif request.user.rol == "DOCENTE" %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:docente_dashboard' %}">
-                      <i class="fas fa-chalkboard"></i> Panel docente
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:docente_metricas' %}">
+                  <i class="fas fa-chart-pie"></i> Métricas
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:cursos_docente' %}">
-                      <i class="fas fa-book"></i> Mis cursos
-                    </a>
-                  </li>
+            {% elif request.user.rol == "ALUMNO" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:alumno_dashboard' %}">
+                  <i class="fas fa-user-graduate"></i> Mi panel
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:docente_metricas' %}">
-                      <i class="fas fa-chart-pie"></i> Métricas
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:consulta_asistencia' %}">
+                  <i class="fas fa-clipboard-check"></i> Mis asistencias
+                </a>
+              </li>
 
-                {% elif request.user.rol == "ALUMNO" %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:alumno_dashboard' %}">
-                      <i class="fas fa-user-graduate"></i> Mi panel
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:subir_certificado' %}">
+                  <i class="fas fa-upload"></i> Subir justificativo
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:consulta_asistencia' %}">
-                      <i class="fas fa-clipboard-check"></i> Mis asistencias
-                    </a>
-                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'asistencias:alumno_metricas' %}">
+                  <i class="fas fa-chart-area"></i> Métricas
+                </a>
+              </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:subir_certificado' %}">
-                      <i class="fas fa-upload"></i> Subir justificativo
-                    </a>
-                  </li>
+            {% endif %}
+          </ul>
+        </div>
+      </aside>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'asistencias:alumno_metricas' %}">
-                      <i class="fas fa-chart-area"></i> Métricas
-                    </a>
-                  </li>
+      <!-- Overlay para cerrar sidebar en móvil -->
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-                {% endif %}
-              </ul>
+      <!-- Botón flotante para abrir sidebar en móvil -->
+      <button class="btn btn-primary sidebar-toggle d-md-none" 
+              type="button" 
+              id="sidebarToggleBtn"
+              aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
 
-            </div>
-          </div>
-        </nav>
-
-        <!-- CONTENIDO PRINCIPAL SI ESTÁ AUTENTICADO -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-
-      {% else %}
-
-        <!-- SIN LOGIN: CONTENIDO A ANCHO COMPLETO -->
-        <main class="col-12 px-3 py-4">
-
-      {% endif %}
-
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="main-content">
         {% block content %}
         {% endblock %}
-
       </main>
 
-    </div>
+    {% else %}
+
+      <!-- ============================================
+           LAYOUT SIN SIDEBAR (NO AUTENTICADO)
+           ============================================ -->
+      <main class="main-content-full">
+        {% block content %}
+        {% endblock %}
+      </main>
+
+    {% endif %}
+
   </div>
 
   <!-- FOOTER -->
-  <footer class="text-center py-3 mt-4 border-top small">
+  <footer class="text-center py-3 border-top small">
     <i class="fas fa-graduation-cap"></i> Sistema de Gestión Académica — Módulo de Asistencias · CENT 40
   </footer>
 
@@ -246,6 +255,53 @@
 
   <!-- JS propio -->
   <script src="{% static 'js/main.js' %}"></script>
+
+  <!-- Script Sidebar Toggle para móvil -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sidebar = document.getElementById('sidebarMenu');
+      const overlay = document.getElementById('sidebarOverlay');
+      const toggleBtn = document.getElementById('sidebarToggleBtn');
+      
+      if (toggleBtn && sidebar && overlay) {
+        // Abrir sidebar
+        toggleBtn.addEventListener('click', function() {
+          sidebar.classList.add('show');
+          overlay.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        });
+        
+        // Cerrar sidebar con overlay
+        overlay.addEventListener('click', function() {
+          sidebar.classList.remove('show');
+          overlay.classList.remove('show');
+          document.body.style.overflow = '';
+        });
+        
+        // Cerrar sidebar con botón X
+        const closeBtn = sidebar.querySelector('.btn-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+          });
+        }
+        
+        // Cerrar sidebar al hacer click en un link (móvil)
+        const navLinks = sidebar.querySelectorAll('.nav-link');
+        navLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+              sidebar.classList.remove('show');
+              overlay.classList.remove('show');
+              document.body.style.overflow = '';
+            }
+          });
+        });
+      }
+    });
+  </script>
 
   <!-- Script Modo Oscuro -->
   <script>
