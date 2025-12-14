@@ -698,3 +698,14 @@ body.dark-mode .sidebar::-webkit-scrollbar-thumb:hover {
     animation: slideIn var(--transition-speed) ease;
   }
 }
+
+@media (max-width: 767.98px) {
+  .wrapper {
+    padding-top: 56px; /* Solo la altura del navbar */
+  }
+  
+  .main-content,
+  .main-content-full {
+    padding-top: 0.5rem;
+  }
+}
