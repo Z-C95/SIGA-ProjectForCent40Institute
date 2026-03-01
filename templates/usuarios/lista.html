@@ -60,6 +60,7 @@
       <th>Rol</th>
       <th>Activo</th>
       <th>Staff</th>
+      <th>Último acceso</th>
       <th style="width:120px;">Acciones</th>
     </tr>
   </thead>
@@ -71,6 +72,7 @@
       <td>{{ u.rol }}</td>
       <td>{{ u.is_active|yesno:"Sí,No" }}</td>
       <td>{{ u.is_staff|yesno:"Sí,No" }}</td>
+      <td class="text-center text-nowrap">{% if u.last_login %}{{ u.last_login|date:"d/m/Y H:i" }}{% else %}<span class="text-muted">—</span>{% endif %}</td>
       <td class="text-center">
         <div class="btn-group" role="group" aria-label="Acciones usuario">
           <!-- Editar: ícono lápiz -->

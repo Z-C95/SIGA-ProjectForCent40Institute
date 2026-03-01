@@ -59,6 +59,7 @@ from .views.alumno_views import (
     subir_certificado,
     alumno_metricas,        # Métricas del alumno
 )
+from .views.session_views import logout_all_devices
 
 app_name = "asistencias"
 
@@ -149,6 +150,9 @@ urlpatterns = [
     path("alumno/dashboard/", alumno_dashboard, name="alumno_dashboard"),
     path("alumno/asistencias/", consulta_asistencia, name="consulta_asistencia"),
     path("alumno/justificativo/subir/", subir_certificado, name="subir_certificado"),
+
+    # Cerrar sesiones en todos los dispositivos
+    path("perfil/logout-all/", logout_all_devices, name="logout_all_devices"),
 
     # =========================
     # Recuperación de contraseña

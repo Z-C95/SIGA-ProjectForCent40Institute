@@ -85,6 +85,19 @@
                 </div>
               {% endif %}
             </div>
+
+            <!-- Botón: Cerrar sesión (logout estándar) -->
+            <a href="{% url 'asistencias:logout' %}" class="btn btn-outline-danger btn-sm w-100 mt-2">
+              Cerrar sesión
+            </a>
+
+            <!-- Botón secundario: Cerrar sesión en todos los dispositivos (con confirmación) -->
+            <form method="post" action="{% url 'asistencias:logout_all_devices' %}" onsubmit="return confirm('¿Seguro que querés cerrar sesión en todos los dispositivos?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm w-100 mt-2">
+                Cerrar sesión en todos los dispositivos
+              </button>
+            </form>
           </div>
         </div>
 
