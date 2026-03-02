@@ -29,7 +29,7 @@ Sistema web desarrollado con Django 5 para la gestión de asistencias académica
 ## 📦 Instalación Local
 ```bash
 # Clonar el repositorio
-git clone https://github.com/Z-C95/SIGA-ProjectForCent40Institute.git
+git clone https://github.com/Z-C95/SIGA
 cd SIGA
 
 # Instalar dependencias
